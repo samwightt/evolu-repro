@@ -1,3 +1,5 @@
+import '~/polyfill'
+
 import { DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
@@ -6,6 +8,8 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 import { MD3DarkTheme, MD3LightTheme, PaperProvider, adaptNavigationTheme } from 'react-native-paper';
 import { useColorScheme } from 'react-native';
+import { EvoluProvider } from "@evolu/react-native";
+import { evolu } from "~/db/db";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -47,13 +51,15 @@ export default function RootLayout() {
   const theme = colorScheme === 'dark' ? CombinedDarkTheme : CombinedDefaultTheme;
 
   return (
-    <PaperProvider theme={theme}>
-      <ThemeProvider value={theme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-      </ThemeProvider>
-    </PaperProvider>
+    <EvoluProvider value={evolu}>
+      <PaperProvider theme={theme}>
+        <ThemeProvider value={theme}>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </ThemeProvider>
+      </PaperProvider>
+    </EvoluProvider>
   );
 }

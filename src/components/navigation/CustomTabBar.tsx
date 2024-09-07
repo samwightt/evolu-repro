@@ -3,8 +3,8 @@ import { BottomNavigation } from 'react-native-paper';
 import { CommonActions, NavigationState } from '@react-navigation/native';
 import { EdgeInsets } from 'react-native-safe-area-context';
 
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { Colors } from '~/constants/Colors';
+import { useColorScheme } from '~/hooks/useColorScheme';
 
 interface CustomTabBarProps {
   navigation: any;
